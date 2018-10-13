@@ -1,7 +1,22 @@
 # DB
 CREAREA SI MODIFICAREA TABELELOR IN SQL SERVER MANAGEMENT STUDIO 
-
-![s1](https://user-images.githubusercontent.com/34598802/45695345-e6075300-bb69-11e8-83e9-56181b79fd51.png)
-![s2](https://user-images.githubusercontent.com/34598802/45695346-e69fe980-bb69-11e8-821d-446383d3e26b.png)
-![s3](https://user-images.githubusercontent.com/34598802/45695361-eb649d80-bb69-11e8-8be3-ef410f47f419.png)
 ![SARCINI](https://user-images.githubusercontent.com/34598688/45611772-45316e80-ba69-11e8-924b-44c39e00174f.png)
+
+Ex: 1
+
+Doar a si b, pentru ca numarul total de cifre e 4, iar numarul de cifre dupa virgula e 1.
+
+Ex: 2
+
+Pentru a pastra rezultatul Col1*Col2 se va utiliza tipul de date DECIMAL(2,1), pentru rezultatul curent al inmultirii sau DECIMAL(5, 3), pentru a aloca mai multa precizie in cazul in care se schimba valorile coloanelor sau se adauga altele noi.
+
+Ex: 3
+
+![UNIVERSITATEA](https://user-images.githubusercontent.com/34598688/45938600-16207d00-bfd4-11e8-942e-d8ac76fa5c1f.png)
+
+Ex: 4
+
+![Discipline](https://user-images.githubusercontent.com/34598688/45933646-9e356100-bf99-11e8-87f2-f68128931c47.png)
+![Grupe](https://user-images.githubusercontent.com/34598688/45933586-8b6e5c80-bf98-11e8-906e-a3e176fcdb0f.png)
+
+
