@@ -12,11 +12,10 @@ Pentru a pastra rezultatul Col1*Col2 se va utiliza tipul de date DECIMAL(2,1), p
 
 Ex: 3
 
-![UNIVERSITATEA](https://user-images.githubusercontent.com/34598688/45938600-16207d00-bfd4-11e8-942e-d8ac76fa5c1f.png)
+
 
 Ex: 4
 
-![Discipline](https://user-images.githubusercontent.com/34598688/45933646-9e356100-bf99-11e8-87f2-f68128931c47.png)
-![Grupe](https://user-images.githubusercontent.com/34598688/45933586-8b6e5c80-bf98-11e8-906e-a3e176fcdb0f.png)
+
 
 
