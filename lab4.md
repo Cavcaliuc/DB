@@ -3,3 +3,5 @@
 INSTRUCTIUNEA SELECT TRANSACT-SQL
 ![image](https://user-images.githubusercontent.com/34598802/46936140-0988c500-d066-11e8-8d3a-5cd9c1de345c.png)
 ![image](https://user-images.githubusercontent.com/34598802/46936197-405edb00-d066-11e8-94b3-f6d9d421a519.png)
+
+4. Afisati care dintre discipline au denumirea formata din mai mult de 20 de caractere? 
