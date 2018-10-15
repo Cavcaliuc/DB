@@ -12,11 +12,16 @@ Pentru a pastra rezultatul Col1*Col2 se va utiliza tipul de date DECIMAL(2,1), p
 
 Ex: 3
 
-![SARCINI](file:///C:/Users/Cavcaliuc%20Nina/Desktop/Baze%20de%20Date/imag/Picture1.png)
+![image](https://user-images.githubusercontent.com/34598802/46935569-35a34680-d064-11e8-9476-af6c8217acda.png)
 
-
+![image](https://user-images.githubusercontent.com/34598802/46935593-48b61680-d064-11e8-9d6a-ce7771f73368.png)
 
 Ex: 4
+
+![image](https://user-images.githubusercontent.com/34598802/46935624-5ff50400-d064-11e8-9b62-f3e6d5a49a52.png)
+
+![image](https://user-images.githubusercontent.com/34598802/46935638-6c795c80-d064-11e8-9bd8-b01c70bf9919.png)
+
 
 
 
