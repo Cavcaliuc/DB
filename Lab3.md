@@ -12,7 +12,7 @@ Pentru a pastra rezultatul Col1*Col2 se va utiliza tipul de date DECIMAL(2,1), p
 
 Ex: 3
 
-![SARCINI](https://user-images.githubusercontent.com/34598688/45933646-9e356100-bf99-11e8-87f2-f68128931c47.png)
+![SARCINI](
 
 
 
