@@ -6,10 +6,15 @@ INSTRUCTIUNEA SELECT TRANSACT-SQL
 ![image](https://user-images.githubusercontent.com/34598802/46936197-405edb00-d066-11e8-94b3-f6d9d421a519.png)
 
 Nr de ordine:
+
 4.Afisati care dintre discipline au denumirea formata din mai mult de 20 de caractere?
+
 select Disciplina
+
 from discipline
+
 where LEN(Disciplina)>20;
+
 
 ![image](https://user-images.githubusercontent.com/34598802/46965709-45e31200-d0b4-11e8-8ac4-ed06b012438a.png)
 
