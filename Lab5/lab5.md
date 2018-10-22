@@ -1,4 +1,6 @@
 
-5. TRANSACT-SQL: INSTRUCTIUNI PROCEDURALE
+5.  DIAGRAME, SCHEME $1 SINONIME 
 
-![image](https://user-images.githubusercontent.com/34598802/47281470-f2a51e00-d5e3-11e8-9483-a92906a4bb37.png)
+![image](https://user-images.githubusercontent.com/34598802/47281731-20d72d80-d5e5-11e8-9759-08622ad3d18d.png)
+
+
