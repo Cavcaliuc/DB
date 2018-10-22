@@ -1,6 +1,6 @@
+# 5.Transact-SQL: instruc/iuni procedurale  
 
-5. # DIAGRAME, SCHEME ȘI SINONIME 
+![image](https://user-images.githubusercontent.com/34598802/47282917-a361ec00-d5e9-11e8-9382-4240c2c32ad3.png)
 
-![image](https://user-images.githubusercontent.com/34598802/47281731-20d72d80-d5e5-11e8-9759-08622ad3d18d.png)
 
 
