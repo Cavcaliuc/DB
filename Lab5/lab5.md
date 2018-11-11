@@ -3,7 +3,7 @@
 ![image](https://user-images.githubusercontent.com/34598802/47282917-a361ec00-d5e9-11e8-9382-4240c2c32ad3.png)
 
 # TASK 1
-Completati urmatorul cod pentru a afisa cel mai mare numar dintre cele trei numere prezentate:
+# Completati urmatorul cod pentru a afisa cel mai mare numar dintre cele trei numere prezentate:
 
 declare @N1 int , @N2 int, @N3 int;
 declare @MAI_MARE int;
@@ -24,7 +24,7 @@ print 'Mai mare = ' + cast(@MAI_MARE as varchar(2));
 
 
 # TASK 2
-Afisati primele zece date(numele, prenumele studentului) in functie de valoarea notei (cu exceptia notelor 6 si 8) a studentului la primul test al disciplinei Baze de date, folosind structura de altemativa IF. .. ELSE. Sa se foloseasca variabilele
+# Afisati primele zece date(numele, prenumele studentului) in functie de valoarea notei (cu exceptia notelor 6 si 8) a studentului la primul test al disciplinei Baze de date, folosind structura de altemativa IF. .. ELSE. Sa se foloseasca variabilele
 
 
 
