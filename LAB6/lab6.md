@@ -86,7 +86,8 @@ from grupe
 
 ## Task 3
 ### Să se scrie o instrucțiune T-SQL, care ar mări toate notele de evaluare șefilor de grupe cu un punct. Nota maximală (10) nu poate fi mărită.
-'''SQL
+
+```SQL
 UPDATE studenti_reusita
  SET Nota=Nota+1
  WHERE Nota<>10 and Nota in
@@ -94,5 +95,6 @@ UPDATE studenti_reusita
 
 SELECT * FROM studenti_reusita
 
-'''
+
+```
 
