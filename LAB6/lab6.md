@@ -158,7 +158,7 @@ select * from profesori_new
 ```
 ![image](https://user-images.githubusercontent.com/34598802/49703520-aef78980-fc0e-11e8-92ce-14d23e80ce53.png)
 
-## Task 5
+## Task 6
 ### Să se insereze datele in tabelul orarul pentru Grupa= 'CIBJ 71' (Id_ Grupa= 1) pentru ziua de luni. Toate lectiile vor avea loc în blocul de studii 'B'. Mai jos, sunt prezentate detaliile de inserare:
 
 (ld_Disciplina = 107, Id_Profesor= 101, Ora ='08:00', Auditoriu = 202);
@@ -189,3 +189,37 @@ INSERT orarul VALUES(109, 117, (SELECT Id_Grupa FROM grupe WHERE Cod_Grupa='CIB1
 SELECT *  FROM orarul
 ```
 ![image](https://user-images.githubusercontent.com/34598802/49703749-bd937000-fc11-11e8-91d7-99eeb669eab1.png)
+
+## Task 7
+### Să se scrie expresiile T-SQL necesare pentru a popula tabelul orarul pentru grupa INF171 ,ziua de luni. Datele necesare pentru inserare trebuie sa fie colectate cu ajutorul instructiunii/instructiunilor SELECT și introduse in tabelul-destinație, știind că:
+lectie #1 (Ora ='08:00', Disciplina = 'Structuri de date si algoritmi', Profesor ='Bivol Ion')
+
+lectie #2 (Ora ='11 :30', Disciplina = 'Programe aplicative', Profesor ='Mircea Sorin')
+
+lectie #3 (Ora ='13:00', Disciplina ='Baze de date', Profesor = 'Micu Elena')
+
+```SQL
+INSERT INTO orarul (Id_Disciplina,Id_Profesor,Id_Grupa,Zi,Ora,Auditoriu,Bloc) 
+VALUES ((SELECT Id_Disciplina FROM discipline WHERE Disciplina='Structuri de date si algoritmi'),
+        (SELECT Id_Profesor FROM profesori WHERE Nume_Profesor='Bivol' and Prenume_Profesor='Ion' ),
+		(SELECT Id_Grupa FROM grupe WHERE Cod_Grupa='INF171'),'Lu','08:00',DEFAULT,DEFAULT)
+    
+INSERT INTO orarul (Id_Disciplina,Id_Profesor,Id_Grupa,Zi,Ora,Auditoriu,Bloc) 
+VALUES ((SELECT Id_Disciplina FROM discipline WHERE Disciplina='Programe aplicative'),
+        (SELECT Id_Profesor FROM profesori WHERE Nume_Profesor='Mircea' and Prenume_Profesor='Sorin' ),
+		(SELECT Id_Grupa FROM grupe WHERE Cod_Grupa='INF171'),'Lu','11:30',DEFAULT,DEFAULT)
+
+INSERT INTO orarul (Id_Disciplina,Id_Profesor,Id_Grupa,Zi,Ora,Auditoriu,Bloc) 
+VALUES ((SELECT Id_Disciplina FROM discipline WHERE Disciplina='Baze de date'),
+        (SELECT Id_Profesor FROM profesori WHERE Nume_Profesor='Micu' and Prenume_Profesor='Elena' ),
+		(SELECT Id_Grupa FROM grupe WHERE Cod_Grupa='INF171'),'Lu','13:00',DEFAULT,DEFAULT)
+SELECT *  FROM orarul
+```
+![image](https://user-images.githubusercontent.com/34598802/49703845-f5e77e00-fc12-11e8-846d-acb72c826984.png)
+
+## Task 8
+### Sa se scrie interogarile de creare a indecșilor asupra tabelelor din baza de date universitatea pentru a asigura o performanta sporita la executarea interogarilor SELECT din Lucrarea practica 4. Rezultatele optimizarii sa fie analizate in baza planurilor de executie, pana la și dupa crearea indecșilor.Indecșii nou-creati sa fie plasati fizic in grupul de fișiere userdatafgroupl (Crearea și întreșinerea bazei de date - sectiunea 2.2.2)
+```SQL
+
+```
+
