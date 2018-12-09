@@ -102,9 +102,13 @@ SELECT * FROM studenti_reusita
 ## Task 5
 ### Sa se creeze un tabel profesori_new, care include urmatoarele coloane: Id_Profesor,Nume _ Profesor, Prenume _ Profesor, Localitate, Adresa _ 1, Adresa _ 2.
 a) Coloana Id_Profesor trebuie sa fie definita drept cheie primara și, în baza ei, sa fie construit un index CLUSTERED.
+
 b) Cîmpul Localitate trebuie sa posede proprietatea DEFAULT= 'mun. Chisinau'.
+
 c) Să se insereze toate datele din tabelul profesori în tabelul profesori_new. Să se scrie, cu acest scop, un număr potrivit de instrucțiuni T-SQL. Datele trebuie să fie transferate în felul următor:
+
 ![image](https://user-images.githubusercontent.com/34598802/49703454-e7e32e80-fc0d-11e8-8ba8-be1e539d2ed2.png)
+
 În coloana Localitate să fie inserata doar informatia despre denumirea localității din coloana-sursă Adresa_Postala_Profesor. În coloana Adresa_l, doar denumirea străzii. În coloana Adresa_2, să se păstreze numărul casei și (posibil) a apartamentului.
 
 ```SQL
@@ -156,8 +160,11 @@ select * from profesori_new
 
 ## Task 5
 ### Să se insereze datele in tabelul orarul pentru Grupa= 'CIBJ 71' (Id_ Grupa= 1) pentru ziua de luni. Toate lectiile vor avea loc în blocul de studii 'B'. Mai jos, sunt prezentate detaliile de inserare:
+
 (ld_Disciplina = 107, Id_Profesor= 101, Ora ='08:00', Auditoriu = 202);
+
 (Id_Disciplina = 108, Id_Profesor= 101, Ora ='11:30', Auditoriu = 501);
+
 (ld_Disciplina = 119, Id_Profesor= 117, Ora ='13:00', Auditoriu = 501);
 
 ```SQL
