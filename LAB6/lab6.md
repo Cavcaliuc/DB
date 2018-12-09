@@ -84,7 +84,7 @@ from grupe
 
 ![image](https://user-images.githubusercontent.com/34598802/49703301-00eae000-fc0c-11e8-89df-3b6b3eaa0352.png)
 
-## Task 3
+## Task 4
 ### Să se scrie o instrucțiune T-SQL, care ar mări toate notele de evaluare șefilor de grupe cu un punct. Nota maximală (10) nu poate fi mărită.
 
 ```SQL
@@ -97,4 +97,88 @@ SELECT * FROM studenti_reusita
 
 
 ```
+![image](https://user-images.githubusercontent.com/34598802/49703404-5d9aca80-fc0d-11e8-853e-70fdbac86cda.png)
 
+## Task 5
+### Sa se creeze un tabel profesori_new, care include urmatoarele coloane: Id_Profesor,Nume _ Profesor, Prenume _ Profesor, Localitate, Adresa _ 1, Adresa _ 2.
+a) Coloana Id_Profesor trebuie sa fie definita drept cheie primara și, în baza ei, sa fie construit un index CLUSTERED.
+b) Cîmpul Localitate trebuie sa posede proprietatea DEFAULT= 'mun. Chisinau'.
+c) Să se insereze toate datele din tabelul profesori în tabelul profesori_new. Să se scrie, cu acest scop, un număr potrivit de instrucțiuni T-SQL. Datele trebuie să fie transferate în felul următor:
+![image](https://user-images.githubusercontent.com/34598802/49703454-e7e32e80-fc0d-11e8-8ba8-be1e539d2ed2.png)
+În coloana Localitate să fie inserata doar informatia despre denumirea localității din coloana-sursă Adresa_Postala_Profesor. În coloana Adresa_l, doar denumirea străzii. În coloana Adresa_2, să se păstreze numărul casei și (posibil) a apartamentului.
+
+```SQL
+CREATE TABLE profesori_new
+(Id_Profesor int NOT NULL
+ ,Nume_Profesor char(255)
+ ,Prenume_Profesor char(255)
+ ,Localitate char (60) DEFAULT ('mun. Chisinau')
+ ,Adresa_1 char (60)
+ ,Adresa_2 char (60),
+  CONSTRAINT [PK_profesori_new] PRIMARY KEY CLUSTERED 
+(	Id_Profesor )) ON [PRIMARY]
+
+INSERT INTO profesori_new (Id_Profesor,Nume_Profesor, Prenume_Profesor, Localitate,Adresa_1, Adresa_2)
+(SELECT Id_Profesor, Nume_Profesor, Prenume_Profesor, Adresa_Postala_Profesor, Adresa_Postala_Profesor, Adresa_Postala_Profesor
+from profesori)
+
+UPDATE profesori_new
+SET Localitate = case when CHARINDEX(', s.',Localitate) >0
+				 then case when CHARINDEX (', str.',Localitate) > 0
+							then SUBSTRING (Localitate,1, CHARINDEX (', str.',Localitate)-1)
+					        when CHARINDEX (', bd.',Localitate) > 0
+							then SUBSTRING (Localitate,1, CHARINDEX (', bd.',Localitate)-1)
+				      end
+				  when  CHARINDEX(', or.',Localitate) >0
+				 then case when CHARINDEX (', str.',Localitate) > 0
+							then SUBSTRING (Localitate,1, CHARINDEX ('str.',Localitate)-3)
+					        when CHARINDEX (', bd.',Localitate) > 0
+							then SUBSTRING (Localitate,1, CHARINDEX ('bd.',Localitate)-3)
+					  end
+				when CHARINDEX('nau',Localitate) >0
+				then SUBSTRING(Localitate, 1, CHARINDEX('nau',Localitate)+2)
+				end
+UPDATE profesori_new
+SET Adresa_1 = case when CHARINDEX('str.', Adresa_1)>0
+					then SUBSTRING(Adresa_1,CHARINDEX('str',Adresa_1), PATINDEX('%, [0-9]%',Adresa_1)- CHARINDEX('str.',Adresa_1))
+			        when CHARINDEX('bd.',Adresa_1)>0
+					then SUBSTRING(Adresa_1,CHARINDEX('bd',Adresa_1), PATINDEX('%, [0-9]%',Adresa_1) -  CHARINDEX('bd.',Adresa_1))
+			   end
+
+UPDATE profesori_new
+SET Adresa_2 = case when PATINDEX('%, [0-9]%',Adresa_2)>0
+					then SUBSTRING(Adresa_2, PATINDEX('%, [0-9]%',Adresa_2)+1,len(Adresa_2) - PATINDEX('%, [0-9]%',Adresa_2)+1)
+				end
+				
+select * from profesori_new
+```
+![image](https://user-images.githubusercontent.com/34598802/49703520-aef78980-fc0e-11e8-92ce-14d23e80ce53.png)
+
+## Task 5
+### Să se insereze datele in tabelul orarul pentru Grupa= 'CIBJ 71' (Id_ Grupa= 1) pentru ziua de luni. Toate lectiile vor avea loc în blocul de studii 'B'. Mai jos, sunt prezentate detaliile de inserare:
+(ld_Disciplina = 107, Id_Profesor= 101, Ora ='08:00', Auditoriu = 202);
+(Id_Disciplina = 108, Id_Profesor= 101, Ora ='11:30', Auditoriu = 501);
+(ld_Disciplina = 119, Id_Profesor= 117, Ora ='13:00', Auditoriu = 501);
+
+```SQL
+CREATE TABLE orarul( Id_Disciplina int NOT NULL,
+                       Id_Profesor int NOT NULL, 
+					   Id_Grupa smallint NOT NULL,
+					   Zi       char(2) NOT NULL,
+					   Ora       Time NOT NULL,
+					   Auditoriu  int ,
+					   Bloc       char(1) NOT NULL DEFAULT ('B'),
+CONSTRAINT [PK_orarul] PRIMARY KEY CLUSTERED 
+(
+	Id_Disciplina ASC,
+	Id_Profesor,
+	Id_Grupa ,
+	ZI )) ON [PRIMARY]
+
+INSERT orarul VALUES(107, 101, (SELECT Id_Grupa FROM grupe WHERE Cod_Grupa='CIB171'), 'Lu', '08:00', 202,DEFAULT)
+INSERT orarul VALUES(108, 101, (SELECT Id_Grupa FROM grupe WHERE Cod_Grupa='CIB171'), 'Lu', '11:30', 501,DEFAULT)
+INSERT orarul VALUES(109, 117, (SELECT Id_Grupa FROM grupe WHERE Cod_Grupa='CIB171'), 'Lu', '13:00', 501,DEFAULT)           
+
+SELECT *  FROM orarul
+```
+![image](https://user-images.githubusercontent.com/34598802/49703749-bd937000-fc11-11e8-91d7-99eeb669eab1.png)
