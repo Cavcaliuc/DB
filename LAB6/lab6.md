@@ -84,4 +84,15 @@ from grupe
 
 ![image](https://user-images.githubusercontent.com/34598802/49703301-00eae000-fc0c-11e8-89df-3b6b3eaa0352.png)
 
+## Task 3
+### Să se scrie o instrucțiune T-SQL, care ar mări toate notele de evaluare șefilor de grupe cu un punct. Nota maximală (10) nu poate fi mărită.
+'''SQL
+UPDATE studenti_reusita
+ SET Nota=Nota+1
+ WHERE Nota<>10 and Nota in
+ (SELECT Nota FROM studenti_reusita WHERE Id_Student IN(SELECT Sef_Grupa FROM grupe)) ;
+
+SELECT * FROM studenti_reusita
+
+'''
 
