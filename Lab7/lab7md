@@ -1,0 +1,60 @@
+# 7. Diagrame, Scheme si Sinonime
+
+![image](https://user-images.githubusercontent.com/34598802/49800779-187fb100-fd51-11e8-864f-aaffd40ebe7e.png)
+
+## Task 1
+### Creați o diagramă a bazei de date, folosind forma de vizualizare standard, structura căreia este descrisă la începutul sarcinilor practice din capitolul 4. 
+![image](https://user-images.githubusercontent.com/34598802/49801060-cdb26900-fd51-11e8-88d4-24ab8f134143.png)
+
+## Task 2
+### Să se adauge constrîngeri referențiale (legate cu tabelele studenti și profesori) necesare coloanelor Sef_grupa și Prof_Indrumator (sarcina3, capitolul 6) din tabelul grupe.
+![image](https://user-images.githubusercontent.com/34598802/49801368-a7d99400-fd52-11e8-9ef0-9e49c3a97386.png)
+![image](https://user-images.githubusercontent.com/34598802/49801405-c049ae80-fd52-11e8-968d-ff01d858cc2d.png)
+### The new database diagram 
+![image](https://user-images.githubusercontent.com/34598802/49801483-fa1ab500-fd52-11e8-917f-513c9c001642.png)
+## Task 3
+
+### La diagrama construită, să se adauge și tabelul orarul definit în capitolul 6 al acestei lucrari:tabelul orarul conține identificatorul disciplinei (ld_Disciplina), identificatorul profesorului(Id_Profesor) și blocul de studii (Bloc). Cheia tabelului este constituită din trei cîmpuri:identificatorul grupei (Id_ Grupa), ziua lectiei (Z1), ora de inceput a lectiei (Ora), sala unde are loc lectia (Auditoriu)
+```SQL
+drop table orarul
+CREATE TABLE orarul ( Id_Disciplina int NOT NULL,
+                       Id_Profesor int NOT NULL, 
+					   Id_Grupa smallint NOT NULL,
+					   Zi       char(2) NOT NULL,
+					   Ora       Time NOT NULL,
+					   Auditoriu  int NOT NULL,
+					   Bloc       char(1) NOT NULL DEFAULT ('B'),
+CONSTRAINT [PK_orarul] PRIMARY KEY CLUSTERED 
+(
+	Id_Grupa ASC,
+	Zi ASC,
+	Ora ASC,
+	Auditoriu )) ON [PRIMARY]
+
+INSERT orarul VALUES(107, 101, (SELECT Id_Grupa FROM grupe WHERE Cod_Grupa='CIB171'), 'Lu', '08:00', 202,DEFAULT)
+INSERT orarul VALUES(108, 101, (SELECT Id_Grupa FROM grupe WHERE Cod_Grupa='CIB171'), 'Lu', '11:30', 501,DEFAULT)
+INSERT orarul VALUES(109, 117, (SELECT Id_Grupa FROM grupe WHERE Cod_Grupa='CIB171'), 'Lu', '13:00', 501,DEFAULT)   
+
+INSERT INTO orarul (Id_Disciplina,Id_Profesor,Id_Grupa,Zi,Ora,Auditoriu,Bloc) 
+VALUES ((SELECT Id_Disciplina FROM discipline WHERE Disciplina='Structuri de date si algoritmi'),
+        (SELECT Id_Profesor FROM profesori WHERE Nume_Profesor='Bivol' and Prenume_Profesor='Ion' ),
+        (SELECT Id_Grupa FROM grupe WHERE Cod_Grupa='INF171'),'Lu','08:00',115,DEFAULT)
+    
+INSERT INTO orarul (Id_Disciplina,Id_Profesor,Id_Grupa,Zi,Ora,Auditoriu,Bloc) 
+VALUES ((SELECT Id_Disciplina FROM discipline WHERE Disciplina='Programe aplicative'),
+        (SELECT Id_Profesor FROM profesori WHERE Nume_Profesor='Mircea' and Prenume_Profesor='Sorin' ),
+        (SELECT Id_Grupa FROM grupe WHERE Cod_Grupa='INF171'),'Lu','11:30',113,DEFAULT)
+
+INSERT INTO orarul (Id_Disciplina,Id_Profesor,Id_Grupa,Zi,Ora,Auditoriu,Bloc) 
+VALUES ((SELECT Id_Disciplina FROM discipline WHERE Disciplina='Baze de date'),
+        (SELECT Id_Profesor FROM profesori WHERE Nume_Profesor='Micu' and Prenume_Profesor='Elena' ),
+        (SELECT Id_Grupa FROM grupe WHERE Cod_Grupa='INF171'),'Lu','13:00',118,DEFAULT)
+```
+![image](https://user-images.githubusercontent.com/34598802/49802089-9c876800-fd54-11e8-93d3-957aa4e38a0e.png)
+![image](https://user-images.githubusercontent.com/34598802/49802324-436c0400-fd55-11e8-8443-836d7fec5f2a.png)
+![image](https://user-images.githubusercontent.com/34598802/49802366-5e3e7880-fd55-11e8-9184-2f23fdefee65.png)
+
+## Task 4
+### Tabelul orarul trebuie să conțină și 2 chei secundare: (Zi, Ora, Id_ Grupa, Id_ Profesor) și (Zi, Ora, ld_Grupa, ld_Disciplina).
+
+
