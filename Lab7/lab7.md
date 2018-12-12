@@ -122,7 +122,47 @@ having count(distinct studenti.studenti_reusita.Id_Profesor) > 1
 
 ### Creați sinonimele respective pentru a simplifica interogările construite în exercițiul precedent și reformulați interogările, folosind sinonimele create.
 
+#### ex.5
+```SQL
+-- Query by using the synonym.  
+--5. Sa se afiseze lista studentilor al caror nume se termina in ,,u" 
+CREATE SYNONYM studentiA FOR studenti.studenti 
 
+select distinct nume_student, prenume_student
+from studentiA
+where Nume_Student like '%u';
+```
+![image](https://user-images.githubusercontent.com/34598802/49857232-b7141c80-fdfa-11e8-85cf-15ab8da781a9.png)
+
+
+#### ex.13
+```SQL
+--ex.13 Aflati cursurile urmate de catre studentul Florea loan.
+CREATE SYNONYM studentiA FOR studenti.studenti
+CREATE SYNONYM reusitaA FOR studenti.studenti_reusita
+CREATE SYNONYM disciplineA FOR plan_studii.discipline
+
+SELECT DISTINCT disciplineA.Disciplina 
+FROM disciplineA, reusitaA, studentiA
+WHERE disciplineA.Id_Disciplina = reusitaA.Id_Disciplina
+AND reusitaA.Id_Student = studentiA.Id_Student
+AND  studentiA.Nume_Student = 'Florea' 
+AND   studentiA.Prenume_Student = 'Ioan'
+```
+![image](https://user-images.githubusercontent.com/34598802/49856539-bf6b5800-fdf8-11e8-8840-91258d7c529f.png)
+
+#### ex.24
+```SQL
+--ex.24 Sa se afiseze lista disciplinelor(Disciplina) predate de cel putin doi profesori.
+CREATE SYNONYM disciplineA FOR plan_studii.discipline
+
+select disciplineA.Disciplina, COUNT(distinct reusitaA.Id_Profesor) as Nr_profesori
+from disciplineA, reusitaA
+where disciplineA.Id_Disciplina = reusitaA.Id_Disciplina
+group by disciplineA.Disciplina
+having count(distinct reusitaA.Id_Profesor) > 1
+```
+![image](https://user-images.githubusercontent.com/34598802/49856875-b333ca80-fdf9-11e8-91a7-4a61bda6026b.png)
 
 
 
