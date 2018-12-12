@@ -120,8 +120,9 @@ AND  studenti.studenti.Nume_Student = 'Florea'
 AND   studenti.studenti.Prenume_Student = 'Ioan'
 ```
 ![image](https://user-images.githubusercontent.com/34598802/49854457-deff8200-fdf2-11e8-889d-d83319e886f5.png)
+## Task 8
 
-
+### Creați sinonimele respective pentru a simplifica interogările construite în exercițiul precedent și reformulați interogările, folosind sinonimele create.
 
 
 
