@@ -97,18 +97,6 @@ from studenti.studenti
 where Nume_Student like '%u';
 ```
 ![image](https://user-images.githubusercontent.com/34598802/49854138-f4c07780-fdf1-11e8-9f50-636518a42b02.png)
-#### ex.10 Gasiti studentii (numele, prenumele), care au obtinut la disciplina Baze de date (examen), în anul 2018, vreo nota mai mica de 8 si mai mare ca 4.
-```SQL
-SELECT distinct studenti.studenti.Nume_Student , studenti.studenti.Prenume_Student 
-FROM studenti.studenti, plan_studii.discipline , studenti.studenti_reusita
-Where studenti.studenti.Id_Student = studenti.studenti_reusita.Id_Student
-and plan_studii.discipline.Id_Disciplina = studenti.studenti_reusita.Id_Disciplina
-and studenti.studenti_reusita.Tip_Evaluare = 'examen' 
-and year(studenti.studenti_reusita.Data_Evaluare) = 2018 
-and plan_studii.discipline.Disciplina = 'Baze de date'
-and studenti.studenti_reusita.Nota between  4 and 8
-```
-![image](https://user-images.githubusercontent.com/34598802/49852901-1caddc00-fdee-11e8-8878-308563a76730.png)
 
 #### ex.13 Aflati cursurile urmate de catre studentul Florea loan.
 ```SQL
@@ -120,6 +108,16 @@ AND  studenti.studenti.Nume_Student = 'Florea'
 AND   studenti.studenti.Prenume_Student = 'Ioan'
 ```
 ![image](https://user-images.githubusercontent.com/34598802/49854457-deff8200-fdf2-11e8-889d-d83319e886f5.png)
+
+#### ex.24 Sa se afiseze lista disciplinelor(Disciplina) predate de cel putin doi profesori.
+```SQL
+select plan_studii.discipline.Disciplina, COUNT(distinct studenti.studenti_reusita.Id_Profesor) as Nr_profesori
+from plan_studii.discipline, studenti.studenti_reusita
+where plan_studii.discipline.Id_Disciplina = studenti.studenti_reusita.Id_Disciplina
+group by plan_studii.discipline.Disciplina
+having count(distinct studenti.studenti_reusita.Id_Profesor) > 1
+```
+![image](https://user-images.githubusercontent.com/34598802/49855319-8382c380-fdf5-11e8-9d5f-a7130290adf5.png)
 ## Task 8
 
 ### Creați sinonimele respective pentru a simplifica interogările construite în exercițiul precedent și reformulați interogările, folosind sinonimele create.
