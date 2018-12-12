@@ -5,10 +5,14 @@
 ### Să se creeze două viziuni in baza interogărilor formulate în două exerciții indicate din capitolul 4. Prima viziune sa fie construită în Editorul de interogări, iar a doua, utilizand View Designer.
 
 a) Folosind Editorul de interogari
+
 ![image](https://user-images.githubusercontent.com/34598802/49869961-b1c6ca00-fe1a-11e8-99b0-08230a9cccfb.png)
+
 b) Folosind View Designer
+
 ![image](https://user-images.githubusercontent.com/34598802/49870043-d753d380-fe1a-11e8-8e6f-d99e933c5ee6.png)
 ![image](https://user-images.githubusercontent.com/34598802/49870120-226de680-fe1b-11e8-8e8f-acc48d8f2edf.png)
+
 ## TASK 2
 
 ### Sa se scrie cate un exemplu de instructiuni INSERT, UPDATE, DELETE asupra viziunilor create. Sa se adauge comentariile respective referitoare la rezultatele executarii acestor instructiuni.
