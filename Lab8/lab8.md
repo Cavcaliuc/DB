@@ -68,7 +68,7 @@ DELETE FROM exercitiul1_1 WHERE Disciplina = 'Fizica'
 ### Sa se scrie instructiunile SQL care ar modifica viziunile create (in exercitiul 1) in asa fel, incat sa nu fie posibila modificarea sau stergerea tabelelor pe care acestea sunt definite si viziunile sa nu accepte operatiuni DML, daca conditiile clauzei WHERE nu sunt satisfacute.
 A)
 ```SQL
-ALTER VIEW View_ex1_Lab8 WITH SCHEMABINDING AS
+ALTER VIEW View_ex1a_lab8 WITH SCHEMABINDING AS
 SELECT studenti.studenti.Id_Student, studenti.studenti.Nume_Student , studenti.studenti.Prenume_Student 
 FROM studenti.studenti, plan_studii.discipline , studenti.studenti_reusita
 Where studenti.studenti.Id_Student = studenti.studenti_reusita.Id_Student
