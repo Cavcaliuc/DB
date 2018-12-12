@@ -93,11 +93,100 @@ WITH CHECK OPTION;
 ## TASK 4
 ### Sa se scrie instructiunile de testare a proprietatilor noi definite.
 
-a) 1)
+a) 1.
 ```SQL
 ALTER TABLE studenti.studenti DROP COLUMN Nume_Student
 ```
 
+a) 2.
+```SQL
+INSERT INTO View_ex1_Lab8 
+values (10, 'A','A',10)
+```
 
+b) 1.
+```SQL
+ALTER TABLE studenti.studenti DROP COLUMN Prenume_Student
+```
+
+b) 2.
+```SQL
+INSERT INTO exercitiul1
+VALUES (1,'Baze de date')
+```
+
+## TASK 5
+### Sa se rescrie 2 interogari formulate in exercitiile din capitolul 4, in asa fel incat interogarile imbricate sa fie redate sub forma expresiilor CTE.
+
+a) ex.38 Furnizati denumirile disciplinelor cu o medie mai mica decat media notelor de la disciplina Baze de date.
+```SQL
+With ex38_cte (Nota) AS
+    (Select AVG(cast(reusitaS.Nota as float)) as Medie
+     FROM reusitaS, disciplineS
+     WHERE Disciplina = 'Baze de date')
+
+SELECT Disciplina, AVG(cast(reusitaS.Nota as float)) as Media
+FROM disciplineS, reusitaS , ex38_cte
+WHERE disciplineS.Id_Disciplina = reusitaS.Id_Disciplina
+GROUP BY Disciplina
+HAVING AVG(cast(reusitaS.Nota as float))< AVG(cast(ex38_cte.Nota as float))
+```
+![image](https://user-images.githubusercontent.com/34598802/49874269-c1e4a680-fe26-11e8-9515-595c0fd9d7b4.png)
+
+b) ex.13
+```SQL
+WITH ex13_CTE (Id_Student) AS
+    (SELECT studentiS.Id_Student
+     FROM studentiS
+     WHERE Nume_Student = 'Florea'
+     AND Prenume_Student = 'Ioan' )
+
+SELECT distinct disciplineS.Disciplina
+FROM disciplineS, ex13_CTE, reusitaS
+WHERE reusitaS.Id_Student = ex13_CTE.Id_Student
+AND disciplineS.Id_Disciplina = reusitaS.Id_Disciplina
+```
+![image](https://user-images.githubusercontent.com/34598802/49874415-1720b800-fe27-11e8-8c5f-c3c00eee5f31.png)
+
+## TASK 6
+### Se considera un graf orientat, si fie se doreste parcursa calea de la nodul id = 3 la nodul unde id = 0. Sa se faca reprezentarea grafului orientat in forma de expresie-tabel recursiv.
+![image](https://user-images.githubusercontent.com/34598802/49874497-4fc09180-fe27-11e8-9578-538c06c8f300.png)
+```SQL
+                     (4)
+                      |
+  (5)-> (0)<- (1)<-  (2)
+                      ^
+                      |
+                     (3)
+```
+###  Sa se observe instructiunea de dupa UNION ALL a membrului recursiv, precum si partea de pana la UNION ALL reprezentata de membrul-ancora.
+```SQL
+CREATE TABLE graph (
+		Id_nr int PRIMARY KEY,
+		dependent_nr int
+		);
+
+INSERT INTO graph VALUES
+(5,0), (4,2), (3,2), (1,0), (2,1), (0, null);
+
+select * from graph
+
+;WITH graph_cte AS (
+		SELECT Id_nr , dependent_nr FROM graph
+		WHERE Id_nr = 3 and dependent_nr = 2
+		
+		UNION ALL
+		
+		SELECT graph.Id_nr, graph.dependent_nr FROM graph
+		INNER JOIN graph_cte
+		ON graph.ID_nr = graph_cte.dependent_nr
+		
+		
+	
+		
+)
+SELECT * from graph_cte
+```
+![image](https://user-images.githubusercontent.com/34598802/49875205-1a1ca800-fe29-11e8-889f-4e2724e029f8.png)
 
 
