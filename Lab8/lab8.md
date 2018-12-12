@@ -93,26 +93,25 @@ WITH CHECK OPTION;
 ## TASK 4
 ### Sa se scrie instructiunile de testare a proprietatilor noi definite.
 
-a) 1.
-```SQL
-ALTER TABLE studenti.studenti DROP COLUMN Nume_Student
-```
 
-a) 2.
 ```SQL
-INSERT INTO View_ex1_Lab8 
-values (10, 'A','A',10)
-```
+INSERT INTO ex1a 
+values (1, 1, 9.00, 2018-01-01, 'Testul 1','Lungu', 'Maria')
 
-b) 1.
-```SQL
-ALTER TABLE studenti.studenti DROP COLUMN Prenume_Student
+INSERT INTO ex1_b 
+values (1, 'Lungu','Maria')
 ```
-
-b) 2.
 ```SQL
-INSERT INTO exercitiul1
-VALUES (1,'Baze de date')
+UPDATE ex1a SET Nume_Student='Lungu'
+WHERE Nume_Student = 'Brasoveanu';
+
+UPDATE ex1_b SET Prenume_Student='Maria'
+WHERE Prenume_Student = 'Teodora';
+```
+```SQL
+DELETE FROM ex1a WHERE Prenume_Student='Maria';
+
+DELETE FROM ex1_b WHERE Id_student=100;
 ```
 
 ## TASK 5
@@ -150,7 +149,6 @@ AND disciplineS.Id_Disciplina = reusitaS.Id_Disciplina
 
 ## TASK 6
 ### Se considera un graf orientat, si fie se doreste parcursa calea de la nodul id = 3 la nodul unde id = 0. Sa se faca reprezentarea grafului orientat in forma de expresie-tabel recursiv.
-![image](https://user-images.githubusercontent.com/34598802/49874497-4fc09180-fe27-11e8-9578-538c06c8f300.png)
 ```SQL
                      (4)
                       |
