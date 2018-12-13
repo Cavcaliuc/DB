@@ -23,4 +23,4 @@ Ex: 4
 [Report4.txt](https://github.com/Cavcaliuc/DB/files/2392788/Report4.txt)
 
 
-![image](https://user-images.githubusercontent.com/34598802/49947060-f4f76a80-fef8-11e8-9ab1-04bbad5aa9f9.png)
+
