@@ -115,6 +115,158 @@ END
 ```
 ![image](https://user-images.githubusercontent.com/34598802/49921349-f3588300-feb5-11e8-9782-5d8daaf38cb2.png)
 ![image](https://user-images.githubusercontent.com/34598802/49921443-34509780-feb6-11e8-9f6e-4db817d3bb99.png)
+![image](https://user-images.githubusercontent.com/34598802/49922229-b3df6600-feb8-11e8-8ba3-cd5dd1f500e7.png)
+## TASK 5
+
+### Sa se creeze o procedura stocata care ar forma o lista cu primii 3 cei mai buni studenti la o disciplina, si acestor studenti sa le fie marita nota la examenul final cu un punct (nota maximala posibila este 10). In calitate de parametru de intrare, va servi denumirea disciplinei. Procedura sa returneze urmatoarele campuri: Cod_Grupa, Nume_Prenume_Student, Disciplina, Nota_ Veche, Nota_Noua.
+```SQL
+CREATE PROCEDURE lab9_ex5
+@discipline VARCHAR(50)
+AS
+DECLARE @best TABLE (Id_Student int, Media float)
+INSERT INTO @best
+	SELECT TOP (3) studenti.studenti_reusita.Id_Student, AVG(cast (Nota as float)) as Media
+	FROM studenti.studenti_reusita, discipline
+	WHERE discipline.Id_Disciplina = studenti.studenti_reusita.Id_Disciplina
+	AND discipline.Disciplina = @discipline
+	GROUP BY studenti.studenti_reusita.Id_Student
+	ORDER BY Media desc		
+
+SELECT cod_grupa, nume_student+' '+Prenume_Student as Nume, disciplina, nota AS Nota_Veche, iif(nota > 9, 10, nota + 1) AS Nota_Noua 
+    FROM studenti.studenti_reusita, discipline, grupe, studenti
+	WHERE discipline.id_disciplina = studenti.studenti_reusita.id_disciplina
+	AND grupe.Id_Grupa = studenti.studenti_reusita.Id_Grupa
+	AND  studenti.Id_Student = studenti.studenti_reusita.Id_Student
+	AND studenti.Id_Student in (select Id_Student from @best)
+	AND Disciplina = @discipline
+	AND Tip_Evaluare = 'Examen'
+
+UPDATE studenti.studenti_reusita
+SET studenti.studenti_reusita.Nota = (CASE WHEN nota >= 9 THEN 10 ELSE nota + 1 END)
+WHERE Tip_Evaluare = 'Examen'
+AND Id_Disciplina = (Select Id_Disciplina from discipline where disciplina=@discipline)
+AND Id_Student in (select Id_Student from @best)
+
+exec lab9_ex5 @discipline = 'Baze de date'
+```
+![image](https://user-images.githubusercontent.com/34598802/49922498-8b0ba080-feb9-11e8-8bed-d85c840c1bd9.png)
+## TASK 6
+### Sa se creeze functii definite de utilizator in baza exercitiilor (2 exercitii) din capitolul 4. Parametrii de intrare trebuie sa corespunda criteriilor din clauzele WHERE ale exercitiilor respective.
+```SQL
+DROP FUNCTION IF EXISTS Lab9_ex6_1 
+GO
+CREATE FUNCTION Lab9_ex6_1 (@evaluare VARCHAR(10), @an SMALLINT, @disciplina VARCHAR(20),
+							@nota1 SMALLINT, @nota2 SMALLINT)
+RETURNS TABLE
+AS
+RETURN
+(SELECT distinct studentiS.Nume_Student ,studentiS.Prenume_Student 
+FROM studentiS, reusitaS, disciplineS
+WHERE studentiS.Id_Student = reusitaS.Id_Student
+and disciplineS.Id_Disciplina = reusitaS.Id_Disciplina
+and Tip_Evaluare = @evaluare
+and year(Data_Evaluare) = @an 
+and Disciplina = @disciplina
+and Nota between  @nota1 and @nota2)
+```
+![image](https://user-images.githubusercontent.com/34598802/49923284-aaa3c880-febb-11e8-9ccb-4536361f60d8.png)
+```SQL
+DROP FUNCTION IF EXISTS Lab9_ex6_2
+GO
+CREATE FUNCTION Lab9_ex6_2 (@nume VARCHAR(20), @prenume VARCHAR(20))
+RETURNS TABLE
+AS
+RETURN
+(SELECT DISTINCT disciplineS.Disciplina
+FROM disciplineS JOIN reusitaS ON disciplineS.Id_Disciplina = reusitaS.Id_Disciplina
+				 JOIN studentiS ON reusitaS.Id_Student = studentiS.Id_Student
+WHERE Nume_Student = @nume	
+AND   Prenume_Student = @prenume
+)
+```
+![image](https://user-images.githubusercontent.com/34598802/49923347-dde65780-febb-11e8-8045-c3ee6b48bcfa.png)
+## TASK 7
+### Sa se scrie functia care ar calcula varsta studentului. Sa se defineasca urmatorul format al functiei: <nume_functie>(<Data_Nastere_Student>).
+```SQL
+DROP FUNCTION IF EXISTS Lab9_ex7
+GO
+
+CREATE FUNCTION Lab9_ex7 (@data_nasterii DATE )
+RETURNS INT
+ BEGIN
+ DECLARE @varsta INT
+ SELECT @varsta = (SELECT (YEAR(GETDATE()) - YEAR(@data_nasterii) - CASE 
+ 						WHEN (MONTH(@data_nasterii) > MONTH(GETDATE())) OR (MONTH(@data_nasterii) = MONTH(GETDATE()) AND  DAY(@data_nasterii)> DAY(GETDATE()))
+						THEN  1
+						ELSE  0
+						END))
+ RETURN @varsta
+ END
+```
+![image](https://user-images.githubusercontent.com/34598802/49923448-37e71d00-febc-11e8-849a-b38f441ae107.png)
+## TASK 8
+
+### Sa se creeze o functie definita de utilizator, care ar returna datele referitoare la reusita unui student. Se defineste urmatorul format al functiei : < nume_functie > (<Nume_Prenume_Student>). Sa fie afisat tabelul cu urmatoarele campuri: Nume_Prenume_Student, Disticplina, Nota, Data_Evaluare.
+```SQL
+DROP FUNCTION IF EXISTS Lab9_ex8
+GO
+
+CREATE FUNCTION Lab9_ex8 (@nume_prenume_s VARCHAR(50))
+RETURNS TABLE 
+AS
+RETURN
+(SELECT Nume_Student + ' ' + Prenume_Student as Student, Disciplina, Nota, Data_Evaluare
+ FROM studentiS, disciplineS, reusitaS
+ WHERE studentiS.Id_Student = reusitaS.Id_Student
+ AND disciplineS.Id_Disciplina = reusitaS.Id_Disciplina 
+ AND Nume_Student + ' ' + Prenume_Student = @nume_prenume_s )
+```
+![image](https://user-images.githubusercontent.com/34598802/49923550-87c5e400-febc-11e8-858c-057335b34582.png)
+## TASK 9
+### Se cere realizarea unei functii definite de utilizator, care ar gasi cel mai sarguincios sau cel mai slab student dintr-o grupa. Se defineste urmatorul format al functiei: <nume_functie> (<Cod_Grupa>, <is_good>). Parametrul <is_good> poate accepta valorile "sarguincios" sau "slab", respectiv. Functia sa returneze un tabel cu urmatoarele campuri Grupa, Nume_Prenume_Student, Nota Medie , is_good. Nota Medie sa fie cu precizie de 2 zecimale.
+```SQL
+DROP FUNCTION IF EXISTS Lab9_ex9
+GO
+
+CREATE FUNCTION Lab9_ex9 (@cod_grupa VARCHAR(10), @is_good VARCHAR(20))
+RETURNS @Test Table (Cod_Grupa varchar(10), Student varchar (100), Media decimal(4,2), Reusita varchar(20))
+AS
+begin
+
+if @is_good = 'sarguincios'
+begin
+insert into @Test
+
+SELECT top (1) Cod_Grupa, Nume_Student + ' ' + Prenume_Student as Student,
+		 CAST(AVG( Nota * 1.0) as decimal (4,2)) as Media, @is_good
+ FROM grupe,studentiS, reusitaS
+ WHERE grupe.Id_Grupa = reusitaS.Id_Grupa
+ AND studentiS.Id_Student = reusitaS.Id_Student
+ AND Cod_Grupa = @cod_grupa
+ GROUP BY Cod_Grupa, Nume_Student, Prenume_Student
+ Order by Media desc
+ end
+ else
+
+ begin 
+ insert into @Test
+SELECT top (1) Cod_Grupa, Nume_Student + ' ' + Prenume_Student as Student,
+		 CAST(AVG( Nota * 1.0) as decimal (4,2)) as Media, @is_good
+ FROM grupe,studentiS, reusitaS
+ WHERE grupe.Id_Grupa = reusitaS.Id_Grupa
+ AND studentiS.Id_Student = reusitaS.Id_Student
+ AND Cod_Grupa = @cod_grupa
+ GROUP BY Cod_Grupa, Nume_Student, Prenume_Student
+ Order by Media 
+ 
+end
+
+
+ RETURN 
+ end
+```
+![image](https://user-images.githubusercontent.com/34598802/49923690-f73bd380-febc-11e8-8a6b-7a38b3df752b.png)
+![image](https://user-images.githubusercontent.com/34598802/49923748-1b97b000-febd-11e8-8b0a-ee70a4e823f5.png)
 
 
 
