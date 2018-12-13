@@ -21,9 +21,11 @@ AND inserted.Id_Grupa = grupe.Id_Grupa
 GO
 ```
 Pina la modificari
+
 ![image](https://user-images.githubusercontent.com/34598802/49924551-5864a680-febf-11e8-9688-c1dd1752d195.png)
 ![image](https://user-images.githubusercontent.com/34598802/49924619-85b15480-febf-11e8-919f-8661ca36fde4.png)
 DUPA
+
 ![image](https://user-images.githubusercontent.com/34598802/49924698-98c42480-febf-11e8-8b36-c7c1bb8343cd.png)
 ## TASK 2
 
@@ -104,6 +106,7 @@ GO
 ```
 ![image](https://user-images.githubusercontent.com/34598802/49925219-f147f180-fec0-11e8-961d-b61a2a394322.png)
 VERIFICARE
+
 ![image](https://user-images.githubusercontent.com/34598802/49925412-82b76380-fec1-11e8-8704-ad8649ff10a6.png)
 ## TASK 5
 
@@ -135,6 +138,7 @@ alter table studenti.studenti alter column Nume_Student varchar(49);
 ```
 ![image](https://user-images.githubusercontent.com/34598802/49925854-c78fca00-fec2-11e8-8185-52ec5436c844.png)
 VERIFICARE
+
 ![image](https://user-images.githubusercontent.com/34598802/49925834-afb84600-fec2-11e8-8db9-dea06cd42765.png)
 ## TASK 6
 
@@ -165,8 +169,10 @@ alter table profesori alter column Prenume_profesor varchar(60)
 ```
 ![image](https://user-images.githubusercontent.com/34598802/49926128-877d1700-fec3-11e8-9b1d-32f8f73cb355.png)
 Inainte
+
 ![image](https://user-images.githubusercontent.com/34598802/49926183-ada2b700-fec3-11e8-9fc2-2e78576a44b3.png)
 DUPA
+
 ![image](https://user-images.githubusercontent.com/34598802/49926219-ca3eef00-fec3-11e8-9f39-efdad6fc65d2.png)
 
 
