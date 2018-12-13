@@ -168,6 +168,7 @@ go
 alter table profesori alter column Prenume_profesor varchar(60)
 ```
 ![image](https://user-images.githubusercontent.com/34598802/49926128-877d1700-fec3-11e8-9b1d-32f8f73cb355.png)
+
 Inainte
 
 ![image](https://user-images.githubusercontent.com/34598802/49926183-ada2b700-fec3-11e8-9fc2-2e78576a44b3.png)
